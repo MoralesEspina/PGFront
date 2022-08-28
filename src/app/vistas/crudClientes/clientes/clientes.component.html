@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="container">
+  <h3>Clientes</h3> <br>
+  <button type="button" class="btn btn-dark" (click)="newClient()">Nuevo Cliente</button>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Nit</th>
+        <th scope="col">Número de Telefono</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Referencias</th>
+        <th scope="col">Latitud</th>
+        <th scope="col">Longitud</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients" (click)="editClient(client._id)">
+        <th scope="row">{{client.name}}</th>
+        <td>{{client.nit}}</td>
+        <td>{{client.phoneNumber}}</td>
+        <td>{{client.direction}}</td>
+        <td>{{client.references}}</td>
+        <td>{{client.latitude}}</td>
+        <td>{{client.length}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<app-footer></app-footer>
