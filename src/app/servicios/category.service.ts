@@ -1,21 +1,20 @@
-import { ClientI } from "../modelos/client.interface";
+import { Category } from '../modelos/category.interface';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
-import { environment } from './../../environments/environment.prod';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class ClientService {
+export class CategoryService {
 
   constructor(private http:HttpClient) {
   }
 
-
-  createClient(form:ClientI){
-    let direccion = environment.URL + "clients/";
+  createCategory(form:Category){
+    let direccion = environment.URL + "category/";
     return this.http.post(direccion,form,{
       headers: new HttpHeaders({
         'Content-Type':'application/json',
@@ -25,9 +24,9 @@ export class ClientService {
   }
 
 
-  getAllClients():Observable<ClientI[]>{
-    let direccion = environment.URL + "clients";
-    return this.http.get<ClientI[]>(direccion,{
+  getAllCategories():Observable<Category[]>{
+    let direccion = environment.URL + "category";
+    return this.http.get<Category[]>(direccion,{
       headers: new HttpHeaders({
         'Content-Type':'application/json',
         'x-access-token': '' + localStorage.getItem("Token")
@@ -35,7 +34,18 @@ export class ClientService {
     });
   }
 
+  getCategoryCollection() {
+    let direccion = environment.URL + "category";
+    return(this.http
+      .get<any>(direccion,{
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'x-access-token': '' + localStorage.getItem("Token")
+        })
+      }))
+  }
 
+/*
   getClientById(_id: any):Observable<ClientI>{
     let direccion = environment.URL + "clients/" +_id;
     return this.http.get<ClientI>(direccion,{
@@ -75,5 +85,5 @@ export class ClientService {
       })
     });
   }
-
+*/
 }

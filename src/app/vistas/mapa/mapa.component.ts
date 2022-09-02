@@ -1,3 +1,4 @@
+import { LocationService } from './../../servicios/location.service';
 import { Component, ElementRef, OnInit } from '@angular/core';
 import * as Mapboxgl from 'mapbox-gl';
 import { Router } from '@angular/router';
@@ -13,12 +14,15 @@ export class MapaComponent implements OnInit {
   mapa!: mapboxgl.Map;
 
 
-  LatE = '' + localStorage.getItem('LatE');
-  LngE = '' + localStorage.getItem('LngE');
+  LatE = '' + localStorage.getItem('Lat');
+  LngE = '' + localStorage.getItem('Lng');
   LatC = parseFloat(this.LatE);
   LngC = parseFloat(this.LngE);
+  latitude =0.00;
+  longitude = 0;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private locationService:LocationService) {
 
   }
 
@@ -33,7 +37,16 @@ export class MapaComponent implements OnInit {
 
   }
 
+  getLocation() {
+
+}
+
   inicializarMapa() {
+    this.locationService.getPosition().then(pos => {
+      this.latitude = pos.lat;
+      this.longitude = pos.lng;
+
+  });
     (Mapboxgl as any).accessToken = environment.mapPK
     if (environment.editing) {
       this.mapa = new Mapboxgl.Map({
@@ -53,6 +66,7 @@ export class MapaComponent implements OnInit {
     }
 
   }
+
   crearMarcador() {
     if (environment.editing) {
       const marker = new Mapboxgl.Marker({

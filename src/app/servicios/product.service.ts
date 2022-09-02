@@ -1,4 +1,4 @@
-import { ClientI } from "../modelos/client.interface";
+import { ProductI } from './../modelos/product.interface';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Observable } from "rxjs";
@@ -8,14 +8,14 @@ import { environment } from './../../environments/environment.prod';
   providedIn: 'root'
 })
 
-export class ClientService {
+export class ProductService {
 
   constructor(private http:HttpClient) {
   }
 
 
-  createClient(form:ClientI){
-    let direccion = environment.URL + "clients/";
+  createProduct(form:ProductI){
+    let direccion = environment.URL + "products/";
     return this.http.post(direccion,form,{
       headers: new HttpHeaders({
         'Content-Type':'application/json',
@@ -25,9 +25,9 @@ export class ClientService {
   }
 
 
-  getAllClients():Observable<ClientI[]>{
-    let direccion = environment.URL + "clients";
-    return this.http.get<ClientI[]>(direccion,{
+  getAllProducts():Observable<ProductI[]>{
+    let direccion = environment.URL + "products";
+    return this.http.get<ProductI[]>(direccion,{
       headers: new HttpHeaders({
         'Content-Type':'application/json',
         'x-access-token': '' + localStorage.getItem("Token")
@@ -35,16 +35,28 @@ export class ClientService {
     });
   }
 
-
-  getClientById(_id: any):Observable<ClientI>{
-    let direccion = environment.URL + "clients/" +_id;
-    return this.http.get<ClientI>(direccion,{
+  updateProduct(form:ProductI, _id:any){
+    let direccion = environment.URL + "products/"+_id;
+    return this.http.put(direccion,form,{
       headers: new HttpHeaders({
         'Content-Type':'application/json',
         'x-access-token': '' + localStorage.getItem("Token")
       })
     });
   }
+
+  getProductById(_id: any):Observable<ProductI>{
+    let direccion = environment.URL + "products/" +_id;
+    return this.http.get<ProductI>(direccion,{
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'x-access-token': '' + localStorage.getItem("Token")
+      })
+    });
+  }
+
+/*
+
 
   getClientByPhone(_id: any):Observable<ClientI>{
     let direccion = environment.URL + "clients/getPhone/" +_id;
@@ -56,15 +68,6 @@ export class ClientService {
     });
   }
 
-  updateClient(form:ClientI, _id:any){
-    let direccion = environment.URL + "clients/"+_id;
-    return this.http.put(direccion,form,{
-      headers: new HttpHeaders({
-        'Content-Type':'application/json',
-        'x-access-token': '' + localStorage.getItem("Token")
-      })
-    });
-  }
 
   deleteClient(_id:string){
     let direccion = environment.URL + "clients/"+_id;
@@ -75,5 +78,5 @@ export class ClientService {
       })
     });
   }
-
+*/
 }

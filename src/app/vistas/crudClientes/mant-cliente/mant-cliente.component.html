@@ -1,52 +1,71 @@
 <app-header></app-header>
 
 <div class="container">
-
-  <form [formGroup]="formCliente" (ngSubmit)="aggClient()">
-    <div class="form.group" *ngIf="this.editing==true">
-      <fieldset disabled>
-        <label for="exampleFormControlInput1">ID Cliente</label>
-        <input type="text" class="form-control" placeholder="ID Cliente" formControlName="_id">
-
-        <label for="exampleFormControlInput1">Latitud</label>
-        <input type="text" class="form-control" placeholder="Latitud" formControlName="latitude">
-
-        <label for="exampleFormControlInput1">Longitud</label>
-        <input type="text" class="form-control" placeholder="Longitud" formControlName="length">
-      </fieldset>
+  <form [formGroup]="formCliente" (ngSubmit)="aggClient()" class="row justify-content-center">
+    <div class=" col-md-12 p-1 " *ngIf= "editing == true">
+      <div class= "row">
+    <div class="form-group col-md-4 p-1" >
+        <label>ID Cliente</label>
+        <input type="text" class="control" placeholder="ID Cliente" formControlName="_id" readonly />
+    </div>
+    <div class="form-group col-md-4 p-1">
+        <label>Latitud</label>
+        <input type="text" class="control" placeholder="Latitud" formControlName="latitude" readonly/>
+    </div>
+    <div class="form-group col-md-4 p-1">
+        <label>Longitud</label>
+        <input type="text" class="control" placeholder="Longitud" formControlName="length" readonly/>
+    </div>
+  </div>
+  </div>
+    <div style="text-align: center">
+      <button type="button" class="btn btn-outline-dark" (click)="map()">
+        Seleccionar Ubicación
+      </button>
     </div>
 
-    <div class="form.group" >
-      <label for="exampleFormControlInput1">Coordenadas</label><p></p>
-      <button type="button" class="btn btn-outline-dark"(click)="map()">Seleccionar en el Mapa</button>
+
+    <div class=" col-md-12 p-1" *ngIf= "mapa == true">
+      <div class= "row">
+        <div class="form-group col-md-4">
+          <label>Nombre</label>
+          <input type="text" class="control" placeholder="Nombre del Cliente" formControlName="name" />
+        </div>
+        <div class="form-group col-md-4" >
+          <label>Nit</label>
+          <input type="text" class="control" placeholder="Nit" formControlName="nit" />
+        </div>
+        <div class="form-group col-md-4" >
+        <label>Número de Telefono</label>
+        <input type="text" class="control" placeholder="Número de Telefono" formControlName="phoneNumber" />
+      </div>
     </div>
+  </div>
 
-    <div class="form.group" >
-      <label for="exampleFormControlInput1">Nombre</label>
-      <input type="text" class="form-control" placeholder="Nombre del Cliente" formControlName="name">
+        <div class="form-group col-md-9 p-1" *ngIf= "mapa == true">
+          <label>Dirección</label>
+          <input type="text" class="control" placeholder="Dirección" formControlName="direction" />
+        </div>
+        <div class="form-group col-md-9 p-1" *ngIf= "mapa == true">
+          <label>Referencias</label>
+          <input type="text" class="control" placeholder="Referencias" formControlName="references" />
+      </div>
 
-      <label for="exampleFormControlInput1">Nit</label>
-      <input type="text" class="form-control" placeholder="Nit" formControlName="nit">
-
-      <label for="exampleFormControlInput1">Número de Telefono</label>
-      <input type="text" class="form-control" placeholder="Número de Telefono" formControlName="phoneNumber">
-
-      <label for="exampleFormControlInput1">Dirección</label>
-      <input type="text" class="form-control" placeholder="Dirección" formControlName="direction">
-
-      <label for="exampleFormControlInput1">Referencias</label>
-      <input type="text" class="form-control" placeholder="Referencias" formControlName="references">
-
-    </div>
-    <br>
-    <div style="text-align: center; ">
-      <button type="submit" class="btn btn-outline-dark">Guardar</button>
-      <button *ngIf="this.editing==true" type="button" class="btn btn-outline-danger"
-        (click)="deleteClient(formCliente.value._id)">Eliminar</button>
-      <button type="button" class="btn btn-outline-secondary" (click)="exit()">Salir</button>
-    </div>
+    <div class=" col-md-12">
+      <div class= "row justify-content-center">
+      <button style="margin: 5px" type="submit" class="btn btn-outline-dark col-md-2">
+        Guardar
+      </button>
+      <button style="margin: 5px" *ngIf="this.editing == true" type="button" class="btn btn-outline-danger  col-md-2"
+        (click)="deleteClient(formCliente.value._id)">
+        Eliminar
+      </button>
+      <button style="margin: 5px" type="button" class="btn btn-outline-secondary  col-md-2" (click)="exit()">
+        Salir
+      </button>
+  </div>
+</div>
   </form>
-
 </div>
 
 <app-footer></app-footer>

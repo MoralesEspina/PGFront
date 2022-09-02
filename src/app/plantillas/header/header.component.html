@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
   <a class="navbar-brand" href="#">Gas Danery</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -8,13 +9,20 @@
       <li class="nav-item">
         <a class="nav-link" href="#"routerLink="/TableClient" >Clientes</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"routerLink="/TableProduct" >Productos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"routerLink="/Pedido" >Pedidos</a>
+      </li>
     </ul>
   </div>
-  <ng-container *ngIf="!logedIn(); else elseTemplate">
-    <button class = "btn btn-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" routerLink= "/login">Log In</button>
+  <ng-container  *ngIf="!logedIn(); else elseTemplate">
+    <button class = "btn btn-dark" type="button" routerLink= "/login">Log In</button>
   </ng-container>
   <ng-template #elseTemplate>
-    <button class = "btn btn-dark" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" (click)="onLogOut()" routerLink= "/login">Log Out</button>
+    <button class = "btn btn-dark" type="button" (click)="onLogOut()" routerLink= "/login">Log Out</button>
   </ng-template>
+</div>
 </nav>
-<br><br>
+
