@@ -15,6 +15,7 @@ export class MantClienteComponent implements OnInit {
 
   editing: boolean = false;
   coordenades: boolean = false;
+  mapa:boolean = environment.mapa;
 
   constructor(private clientService: ClientService,
     private router: Router,
@@ -38,10 +39,10 @@ export class MantClienteComponent implements OnInit {
   }
 
   deleteLocalStorage(){
-    /*localStorage.removeItem("LngE");
+    localStorage.removeItem("LngE");
     localStorage.removeItem("LatE")
     localStorage.removeItem("Lat")
-    localStorage.removeItem("Lng")*/
+    localStorage.removeItem("Lng")
   }
 
   loadClient() {
@@ -52,6 +53,13 @@ export class MantClienteComponent implements OnInit {
       this.clientService.getClientById(id_entrada).subscribe(
         data => {
           this.modeloClient = data;
+          if (localStorage.getItem("Lat")) {
+
+          }else{
+            localStorage.setItem("Lat", this.modeloClient.latitude.toString());
+            localStorage.setItem("Lng", this.modeloClient.length.toString());
+          }
+
           this.formCliente.setValue({
             '_id': this.modeloClient._id,
             'name': this.modeloClient.name,
@@ -90,6 +98,7 @@ export class MantClienteComponent implements OnInit {
       this.clientService.updateClient(Cli, Cli._id).subscribe(data => {
         environment.editing = false;
         this.editing = false;
+        environment.mapa = false;
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -152,6 +161,9 @@ export class MantClienteComponent implements OnInit {
       confirmButtonText: 'Si, Borralo!'
     }).then((result) => {
       if (result.isConfirmed) {
+        environment.editing = false;
+        this.editing = false;
+        environment.mapa = false;
         this.clientService.deleteClient(_id).subscribe(data => {
           Swal.fire(
             'Eliminado!',
@@ -176,10 +188,9 @@ export class MantClienteComponent implements OnInit {
     if(this.editing){
       environment.editing = true;
       localStorage.setItem('ID',id_entrada)
-      localStorage.setItem('LatE',this.formCliente.value.latitude )
-      localStorage.setItem('LngE',this.formCliente.value.length)
       this.router.navigate(['mapa']);
     }else{
+      environment.mapa = true;
       environment.editing = false;
       this.editing = false;
       this.router.navigate(['mapa']);
@@ -190,6 +201,7 @@ export class MantClienteComponent implements OnInit {
   exit() {
     environment.editing = false;
     this.editing = false;
+    environment.mapa = false;
     this.deleteLocalStorage();
     this.router.navigate(['TableClient']);
   }

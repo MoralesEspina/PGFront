@@ -1,32 +1,44 @@
 <app-header></app-header>
 
 <div class="container">
-  <h3>Clientes</h3> <br>
-  <button type="button" class="btn btn-dark" (click)="newClient()">Nuevo Cliente</button>
-  <table class="table table-hover">
-    <thead>
+  <h3 style="text-align: center;">Clientes</h3>
+  <div class = "container-fluid">
+    <mat-form-field>
+      <input matInput placeholder="Ingrese Número de Telefono" name="filterClient"
+      [(ngModel)]="filterClient">
+    </mat-form-field>
+    <button style="margin-right:15px ;" class="btn btn-dark" (click)="newClient()">Nuevo Cliente</button>
+
+  </div>
+
+  <div class="table-responsive">
+  <table style = "margin-top: 15px;" class="table table-bordered">
+    <thead class="thead-dark">
       <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Nit</th>
-        <th scope="col">Número de Telefono</th>
-        <th scope="col">Dirección</th>
-        <th scope="col">Referencias</th>
-        <th scope="col">Latitud</th>
-        <th scope="col">Longitud</th>
+        <th style="text-align: center;" scope="col">Nombre</th>
+        <th style="text-align: center;" scope="col">Nit</th>
+        <th style="text-align: center;" scope="col">Número de Telefono</th>
+        <th style="text-align: center;" scope="col">Dirección</th>
+        <th style="text-align: center;" scope="col">Crear Pedido</th>
+        <th style="text-align: center;" scope="col">Editar</th>
       </tr>
     </thead>
+
     <tbody>
-      <tr *ngFor="let client of clients" (click)="editClient(client._id)">
+      <tr *ngFor="let client of clients | pipes:filterClient">
         <th scope="row">{{client.name}}</th>
-        <td>{{client.nit}}</td>
-        <td>{{client.phoneNumber}}</td>
-        <td>{{client.direction}}</td>
-        <td>{{client.references}}</td>
-        <td>{{client.latitude}}</td>
-        <td>{{client.length}}</td>
+        <td style="text-align: center;">{{client.nit}}</td>
+        <td style="text-align: center;">{{client.phoneNumber}}</td>
+        <td style="text-align: center;">{{client.direction}}</td>
+        <td class="puntero" style="color :rgba(187, 76, 76, 0.952); text-align: center;"
+        matTooltip="Crear Pedido" (click)="newOrder(client._id)">
+        <mat-icon>add_shopping_cart</mat-icon></td>
+        <td class="puntero" style="color :rgba(187, 76, 76, 0.952); text-align: center;"
+        matTooltip="Editar" (click)="editClient(client._id)">
+        <mat-icon>edit</mat-icon></td>
       </tr>
     </tbody>
   </table>
 </div>
+</div>
 
-<app-footer></app-footer>

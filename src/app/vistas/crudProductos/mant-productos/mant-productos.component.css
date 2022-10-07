@@ -1,0 +1,21 @@
+.control{
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  border: 1px solid black;
+  font-size: 16px;
+}
+
+.form-disabled{
+  width: 75%;
+  background: rgb(247, 246, 246);
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.container{
+  display: grid;
+  min-height: 95vh;
+  grid-template-rows: auto 1fr auto;
+}

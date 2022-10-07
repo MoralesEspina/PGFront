@@ -46,6 +46,16 @@ export class ClientService {
     });
   }
 
+  getClientByPhone(_id: any):Observable<ClientI>{
+    let direccion = environment.URL + "clients/getPhone/" +_id;
+    return this.http.get<ClientI>(direccion,{
+      headers: new HttpHeaders({
+        'Content-Type':'application/json',
+        'x-access-token': '' + localStorage.getItem("Token")
+      })
+    });
+  }
+
   updateClient(form:ClientI, _id:any){
     let direccion = environment.URL + "clients/"+_id;
     return this.http.put(direccion,form,{
