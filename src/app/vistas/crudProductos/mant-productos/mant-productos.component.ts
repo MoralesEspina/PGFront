@@ -31,18 +31,18 @@ export class MantProductosComponent implements OnInit {
     modProd:ProductI={
       _id:'',
       name:'',
-      category:'h',
-      type:'',
-      price:0,
+      id_category:['',''],
+      purchase_price:0,
+      sale_price:0,
       quantity:0
     }
 
   formProducto = new FormGroup({
     _id: new FormControl(''),
     name: new FormControl('',[Validators.required,Validators.minLength(5),Validators.maxLength(50)]),
-    category: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(10)]),
-    type: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(5)]),
-    price: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(5)]),
+    id_category: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(10)]),
+    purchase_price: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(5)]),
+    sale_price: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(5)]),
     quantity: new FormControl('',[Validators.required,Validators.minLength(1),Validators.maxLength(5)]),
   })
 
@@ -53,7 +53,6 @@ export class MantProductosComponent implements OnInit {
   }
 
   collectionCategory = [{'name': this.getCollectionCategory}];
-  collectionTypes = [{'types': this.getCollectionCategory}];
 
   loadProduct() {
     let id_entrada = this._activatedRoute.snapshot.params['id'];
@@ -66,9 +65,9 @@ export class MantProductosComponent implements OnInit {
           this.formProducto.setValue({
             '_id': this.modProd._id,
             'name': this.modProd.name,
-            'category': this.modProd.category,
-            'type': this.modProd.type,
-            'price': this.modProd.price,
+            'id_category': this.modProd.id_category,
+            'purchase_price': this.modProd.purchase_price,
+            'sale_price': this.modProd.sale_price,
             'quantity': this.modProd.quantity,
           });
         }, error => {
@@ -103,9 +102,9 @@ aggProducto() {
     const Prod: ProductI = {
       _id: this.formProducto.value._id,
       name: this.formProducto.value.name,
-      category: this.formProducto.value.category,
-      type: this.formProducto.value.type,
-      price: this.formProducto.value.price,
+      id_category: this.formProducto.value.id_category,
+      purchase_price: this.formProducto.value.purchase_price,
+      sale_price: this.formProducto.value.sale_price,
       quantity: this.formProducto.value.quantity
     }
     this.productService.updateProduct(Prod, Prod._id).subscribe(data => {
@@ -133,9 +132,9 @@ aggProducto() {
     const Prod: ProductI = {
       _id: '',
       name: this.formProducto.value.name,
-      category: this.formProducto.value.category,
-      type: this.formProducto.value.type,
-      price: this.formProducto.value.price,
+      id_category: this.formProducto.value.id_category,
+      purchase_price: this.formProducto.value.purchase_price,
+      sale_price: this.formProducto.value.sale_price,
       quantity: 0
 
     }

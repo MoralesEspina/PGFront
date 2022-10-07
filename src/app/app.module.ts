@@ -28,6 +28,8 @@ import { HeaderComponent } from './plantillas/header/header.component';
 import { PipesPipe } from './pipes/pipes.pipe';
 import { MantProductosComponent } from './vistas/crudProductos/mant-productos/mant-productos.component';
 import { ProductosComponent } from './vistas/crudProductos/productos/productos.component';
+import { MantPedidosComponent } from './vistas/crudPedido/mant-pedidos/mant-pedidos.component';
+import { SidebarComponent } from './plantillas/sidebar/sidebar.component';
 
 
 @NgModule({
@@ -45,6 +47,8 @@ import { ProductosComponent } from './vistas/crudProductos/productos/productos.c
     PipesPipe,
     MantProductosComponent,
     ProductosComponent,
+    MantPedidosComponent,
+    SidebarComponent,
 
   ],
   imports: [
